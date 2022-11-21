@@ -3,15 +3,26 @@
 @tailwind components;
 @tailwind utilities;
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
+.option-default {
+  @apply !bg-white !text-black
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.option-default>div:first-child {
+  @apply hidden
+}
+
+.option-correct {
+  @apply !bg-green-500 !text-white
+}
+
+.option-correct>div:first-child {
+  @apply block
+}
+
+.option-wrong {
+  @apply !bg-red-500 !text-white
+}
+
+.option-wrong>div:first-child {
+  @apply hidden
 }
