@@ -11,6 +11,7 @@ import Timer from '../components/Timer.vue';
 // data
 const gameEnded = ref(false);
 let canClick = ref(true);
+let isQuestionsLoading = ref(false);
 let questionCounter = ref(0);
 const timer = ref(100);
 const userScore = ref(0)
@@ -91,6 +92,7 @@ const restartGame = () => {
 }
 
 const fetchRemoteData = async () => {
+  isQuestionsLoading.value = true;
   await fetch('https://opentdb.com/api.php?amount=10&category=18&type=multiple')
     .then(res => res.json())
     .then(data => {
@@ -106,8 +108,8 @@ const fetchRemoteData = async () => {
       questions.value = newQuestions;
       loadQuestion();
     })
-    .catch(err => console.log(err));
-
+    .catch(err => console.log(err))
+    .finally(() => isQuestionsLoading.value = false)
 }
 
 // life cycle hooks
@@ -119,7 +121,7 @@ onMounted(() => {
 
 <template>
   <main class="bg-gray-100 min-h-screen grid place-content-center py-5">
-    <div v-if="questions.length > 0"
+    <div v-if="questions.length > 0 && !isQuestionsLoading"
       class="grid w-screen sm:max-w-sm shadow-md bg-gray-200 sm:rounded-lg mx-auto px-6 py-10 h-screen sm:h-auto min-h-[600px] overflow-y-auto bg-pattern">
       <!-- gameOver overlay -->
       <QuizEndedOverlay v-if="gameEnded" :score="userScore" :restart-game="restartGame" />
