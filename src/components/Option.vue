@@ -6,7 +6,7 @@
             <p class="font-bold -rotate-45 text-sm">+10</p>
         </div>
         <!-- option id -->
-        <div class="bg-gray-600 text-white p-3 px-4 rounded">{{ idx }}</div>
+        <div class="bg-gray-600 text-white p-3 px-4 rounded">{{ mapOption(idx) }}</div>
         <!-- option text -->
         <div class="font-semibold">{{ choice }}</div>
     </div>
@@ -17,4 +17,13 @@ defineProps({
     idx: Number,
     choice: String,
 });
+
+const options = {
+    0: 'A',
+    1: 'B',
+    2: 'C',
+    3: 'D'
+}
+
+const mapOption = (idx) => options[idx];
 </script>
