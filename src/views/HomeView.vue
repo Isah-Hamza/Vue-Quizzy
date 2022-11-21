@@ -118,8 +118,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <main v-if="questions.length > 0" class="bg-gray-100 min-h-screen grid place-content-center">
-    <div
+  <main class="bg-gray-100 min-h-screen grid place-content-center py-5">
+    <div v-if="questions.length > 0"
       class="grid w-screen sm:max-w-sm shadow-md bg-gray-200 sm:rounded-lg mx-auto px-6 py-10 h-screen sm:h-auto min-h-[600px] overflow-y-auto bg-pattern">
       <!-- gameOver overlay -->
       <QuizEndedOverlay v-if="gameEnded" :score="userScore" :restart-game="restartGame" />
@@ -142,8 +142,8 @@ onMounted(() => {
         <ProgressBar :questions="questions" :question-counter="questionCounter" />
       </div>
     </div>
+    <LoadingState v-else />
   </main>
-  <LoadingState v-else />
 </template>
 
 <style scoped>
